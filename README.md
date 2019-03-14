@@ -1,6 +1,6 @@
 # vue-mastery
 
-### Adding progress bar based on NProgress.js library via using in-component Route Navigation Guards
+# Adding progress bar based on NProgress.js library via using in-component Route Navigation Guards
 
 ## Project setup
 ```
