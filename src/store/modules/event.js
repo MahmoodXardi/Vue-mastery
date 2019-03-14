@@ -51,7 +51,7 @@ export const actions = {
       throw error 
     });
   },
-  fetchEvents({commit , dispatch},events){
+  fetchEvents({commit , dispatch}){
     EventService.getEvents()
     .then(response => {
       let eventsArray = []; // temporary array  
@@ -86,7 +86,7 @@ export const actions = {
 
     } else { // not found the event, go fetch the event from DB
 
-      EventService.getEvent(id)
+      return EventService.getEvent(id)
         .then(response => { 
           commit('SET_EVENT',response.data);
         })

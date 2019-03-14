@@ -51,7 +51,7 @@
   </div>
 </template>
 
-<<script>
+<script>
 // import Datepicker
 import Datepicker from "vuejs-datepicker";
 

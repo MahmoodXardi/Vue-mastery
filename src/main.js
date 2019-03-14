@@ -5,6 +5,7 @@ import store from './store/store'
 //import BaseIcon from '@/components/BaseIcon.vue';
 import VuePaginate from 'vue-paginate';
 
+import 'nprogress/nprogress.css';
 
 Vue.use(VuePaginate);
 

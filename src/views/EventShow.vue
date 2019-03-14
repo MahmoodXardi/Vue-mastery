@@ -36,14 +36,33 @@
 // import the mapState and mapActions helper 
 import {mapState , mapActions} from 'vuex'
 
+import NProgress from "nprogress";
+import store from "@/store/store";
+
 export default {
   props: ['id'],
+  beforeRouteEnter (routeto, routefrom, next) { // called before component created 
+    // start the progress bar before navigating to this component 
+    NProgress.start();
+
+    // call fetchEvent action , we don't have access to 'this' 
+    // So, we need to import vuex store 
+    store.dispatch('event/fetchEvent', routeto.params.id).then(() => {
+      // when api returns the response, we want to finish the progress bar 
+      NProgress.done(); 
+
+      // call next() to continue navigating to the component
+      next() 
+    });
+    //Note that fetchEvent action must return a promise here to fire the then() method
+
+  },
   data() {
     return {
       // event: {}  // single event object  
     }
   },
-  created() {
+  //created() {
     // EventService.getEvent(this.id)
     // .then(response => { 
 
@@ -61,13 +80,13 @@ export default {
 
     // Dispatcher viz mapActions helper
     // call fetchEvent function and pass the prop id  
-    this.fetchEvent(this.id);
+//    this.fetchEvent(this.id);
     
-  },
+ // },
   computed: mapState({
     event : state => state.event.event
   }),
-  methods: mapActions('event' , ['fetchEvent']) // mapActions(['even/fetchEvent'])
+//  methods: mapActions('event' , ['fetchEvent']) // mapActions(['even/fetchEvent'])
   // mapActions(namespace,['actionName'])  OR  mapActions(['namespace/action'])
 }
 </script>
