@@ -52,7 +52,7 @@ export const actions = {
     });
   },
   fetchEvents({commit , dispatch}){
-    EventService.getEvents()
+    return EventService.getEvents()
     .then(response => {
       let eventsArray = []; // temporary array  
       
@@ -62,6 +62,8 @@ export const actions = {
       }
 
       commit('SET_EVENTS',eventsArray);
+      
+      return eventsArray;
     })
     .catch(error => {
       // console.log("There is an error : "+error.response);
@@ -84,11 +86,15 @@ export const actions = {
 
       commit('SET_EVENT',event);
 
+      // return event from action 
+      return event;
+
     } else { // not found the event, go fetch the event from DB
 
-      return EventService.getEvent(id)
+       return EventService.getEvent(id)
         .then(response => { 
           commit('SET_EVENT',response.data);
+          return response.data;
         })
         .catch(error => {
           // console.log("There is an error : "+error.response);

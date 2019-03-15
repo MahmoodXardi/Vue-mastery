@@ -4,7 +4,7 @@
     <h1>Event for {{user.user.name}} </h1> <!-- moduleName.stateName.propertyName -->
  
     
-    <paginate name="eventCards" v-bind:list="event.events" :per="3">
+    <paginate name="eventCards" v-bind:list="events" :per="3">
       <EventCard v-for="event in paginated('eventCards')" :key="event.id" :event="event"></EventCard>
      
      </paginate>
@@ -37,6 +37,12 @@ export default {
   components: {
     //locally register EventCArd vue component 
     EventCard
+  },
+  props:{
+    events:{
+      type: Array,
+      required: true
+    }
   },
   data() {
     return {
@@ -91,9 +97,10 @@ export default {
 
 
       // fetch data via vuex 
-      this.$store.dispatch('event/fetchEvents');
+//      this.$store.dispatch('event/fetchEvents');
   },
-  computed: mapState(['event','user'])
+//  computed: mapState(['event','user'])
+  computed: mapState(['user'])
 }
 </script>
 

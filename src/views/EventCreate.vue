@@ -55,6 +55,10 @@
 // import Datepicker
 import Datepicker from "vuejs-datepicker";
 
+// include NProgress library 
+import NProgress from "nprogress";
+
+
 export default {
   components: {
     Datepicker,
@@ -73,6 +77,9 @@ export default {
   },
   methods: {
     createEvent(){
+      //Stsrt progress bar
+      NProgress.start();
+
       // Dispatcher 
       this.$store.dispatch('event/createEvent',this.event).then(()=>{
 
@@ -88,7 +95,8 @@ export default {
       }).catch(()=> {
         //console.log('There was a problem creating your event');
 
-        // 
+        // finish progress bar
+        NProgress.done();
       })
       
     },
